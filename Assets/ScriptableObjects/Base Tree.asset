@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Base Tree
   m_EditorClassIdentifier: 
   treeType: BasicTree
-  treePrefab: {fileID: 5081378640111839596, guid: cfcea1bef252c491e8f667d61a07da44, type: 3}
+  fruitPrefab: {fileID: 431050899200795660, guid: 7f43ad0a1dc9942deb52963a8ee6e6f4, type: 3}
   baseProfit: 100
   maxFruits: 3
   growthTime: 3

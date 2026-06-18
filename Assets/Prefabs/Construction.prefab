@@ -455,6 +455,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6540654423376592508}
   - component: {fileID: -4705972318511322334}
+  - component: {fileID: -3921149177982113969}
   m_Layer: 0
   m_Name: Construction
   m_TagString: Untagged
@@ -500,6 +501,26 @@ MonoBehaviour:
   - {fileID: 1302891246214687470}
   - {fileID: 1302891244408951080}
   - {fileID: 1302891245176948397}
+  _fruitStack: {fileID: -3921149177982113969}
+--- !u!114 &-3921149177982113969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5081378640111839596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 785712d07f4a28a45812028e0c7a3ce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useFixedSlots: 1
+  fixedSlots:
+  - {fileID: 1302891246214687470}
+  - {fileID: 1302891244408951080}
+  - {fileID: 1302891245176948397}
+  stackAnchor: {fileID: 0}
+  verticalSpacing: 0.22
 --- !u!1 &5823776604973698877
 GameObject:
   m_ObjectHideFlags: 0

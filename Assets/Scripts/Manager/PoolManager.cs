@@ -30,6 +30,19 @@ public class PoolManager : MonoBehaviour
         return spawnedObject;
     }
 
+    public GameObject Spawn(Transform parent, GameObject prefab, Vector3 position,Quaternion rotation, int indexKey)
+    {
+        if (!pools.ContainsKey(indexKey))
+        {
+            CreatePool(prefab, indexKey);
+        }
+
+        GameObject spawnedObject = pools[indexKey].Get();
+        spawnedObject.transform.SetParent(parent, true);
+        spawnedObject.transform.SetPositionAndRotation(position, rotation);
+        return spawnedObject;
+    }
+
     /// <summary>
     /// Returns an object back to its respective pool to be reused later.
     /// </summary>

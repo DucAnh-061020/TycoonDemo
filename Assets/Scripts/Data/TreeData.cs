@@ -4,7 +4,7 @@ using UnityEngine;
 public class TreeData : ScriptableObject
 {
     public string treeType;
-    public GameObject treePrefab;
+    public Transform fruitPrefab;
     public int baseProfit;
     public int maxFruits;
     public float growthTime;

@@ -21,6 +21,6 @@ public class AgentVisuals : MonoBehaviour
     {
         _animator.SetBool("IsMove", _isMoving);
         _animator.SetBool("IsEmpty", _isEmpty);
-        _animator.SetBool("IsCarryMove", _isEmpty && _isMoving);
+        _animator.SetBool("IsCarryMove", !_isEmpty && _isMoving);
     }
 }

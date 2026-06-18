@@ -19,6 +19,16 @@ public class Dock : MonoBehaviour
             waitingCustomers.Enqueue(customer);
     }
 
+    public CustomerAI PrepareTransaction()
+    {
+        if (waitingCustomers.Count > 0)
+        {
+            reservedCustomerCount = Mathf.Max(0, reservedCustomerCount - 1);
+            return waitingCustomers.Dequeue(); // Dequeue here so other deliverers skip this customer
+        }
+        return null;
+    }
+
     public bool TryReserveCustomer()
     {
         if(waitingCustomers.Count > reservedCustomerCount)

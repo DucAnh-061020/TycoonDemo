@@ -5,10 +5,12 @@ public class CustomerAI : MonoBehaviour, IPoolableObjects
     [SerializeField] private float _moveSpeed = 4f;
     [SerializeField] private int _poolIndex;
     [SerializeField] private AgentVisuals _visuals;
+    [SerializeField] private FruitStack _fruitStack;
     private Market _market;
     private Dock _assignedDock;
     private bool _isServed = false;
     public int PoolIndex => _poolIndex;
+    public FruitStack FruitStack => _fruitStack;
 
     public void InitializeFromPool(Market market)
     {
@@ -16,6 +18,7 @@ public class CustomerAI : MonoBehaviour, IPoolableObjects
         this._assignedDock = market.GetAvailableDock();
         this._isServed = false;
 
+        _fruitStack.ClearAndDestroyStack();
         transform.position = market.EntryPoint.position;
         StartCoroutine(CustomerRoutine());
     }
@@ -25,15 +28,15 @@ public class CustomerAI : MonoBehaviour, IPoolableObjects
         _visuals.SetMovement(true);
         _visuals.SetPocket(true);
         yield return MovementUtility.MoveToTarget(transform, _assignedDock.WaitingPoint.position, _moveSpeed);
-
+        transform.LookAt(_assignedDock.DeliverPoint);
         _assignedDock.RegisterCustomer(this);
         _visuals.SetMovement(false);
         while (!_isServed)
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForEndOfFrame();
         }
         _visuals.SetMovement(true);
-        _visuals.SetPocket(true);
+        _visuals.SetPocket(false);
         GameDirector.Instance.NotifyCustomerLeft();
         yield return MovementUtility.MoveToTarget(transform, _market.ExitPoint.position, _moveSpeed);
         PoolManager.Instance.Release(gameObject, _poolIndex);

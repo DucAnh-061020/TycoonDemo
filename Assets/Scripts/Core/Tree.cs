@@ -4,12 +4,13 @@ public class Tree : MonoBehaviour, IClickable, IPoolableObjects
 {
     [SerializeField] private int _poolIndex;
     [SerializeField] private Transform _gatherPoint;
-    [SerializeField] private Transform[] _fruitHolders;
+    [SerializeField] private FruitStack _fruitStack;
     private TreeData _data;
     private int _currentFruits;
     private int _currentLevel = 1;
     public Transform GatherPoint => _gatherPoint;
     public int PoolIndex => _poolIndex;
+    public FruitStack FruitStack => _fruitStack;
 
     public void Initialize(TreeData treeData)
     {
@@ -22,9 +23,16 @@ public class Tree : MonoBehaviour, IClickable, IPoolableObjects
         while (true)
         {
             yield return new WaitForSeconds(_data.growthTime);
-            if (_currentFruits < _data.maxFruits)
+            if (_fruitStack.CanAdd(_data.maxFruits))
             {
-                _currentFruits++;
+                Transform slot = _fruitStack.GetTargetParent();
+                Vector3 localPos = _fruitStack.GetTargetPosition();
+
+                Fruit fruitData = _data.fruitPrefab.GetComponent<Fruit>();
+                GameObject fruit = PoolManager.Instance.Spawn(_data.fruitPrefab.gameObject, slot.position, Quaternion.identity,fruitData.PoolIndex);
+                fruit.transform.position = localPos;
+                Fruit fruitInfo = fruit.GetComponent<Fruit>();
+                _fruitStack.Push(fruitInfo);
             }
         }
     }

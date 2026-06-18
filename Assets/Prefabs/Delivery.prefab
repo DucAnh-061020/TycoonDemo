@@ -1302,6 +1302,7 @@ GameObject:
   - component: {fileID: 6540654423376592508}
   - component: {fileID: 591197581083066228}
   - component: {fileID: 5317589918010086176}
+  - component: {fileID: 2157060108659829071}
   m_Layer: 0
   m_Name: Delivery
   m_TagString: Untagged
@@ -1341,6 +1342,7 @@ MonoBehaviour:
   _moveSpeed: 4
   _poolIndex: 1
   _visuals: {fileID: 5317589918010086176}
+  _fruitStack: {fileID: 2157060108659829071}
 --- !u!114 &5317589918010086176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1354,6 +1356,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 1677055900559989277}
+--- !u!114 &2157060108659829071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5081378640111839596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 785712d07f4a28a45812028e0c7a3ce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fixedSlots:
+  - {fileID: 6189031941684784857}
+  - {fileID: 2134864908244946697}
+  - {fileID: 6514167691253798742}
 --- !u!1 &5693225996506118139
 GameObject:
   m_ObjectHideFlags: 0
