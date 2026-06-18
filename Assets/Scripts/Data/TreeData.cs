@@ -5,7 +5,6 @@ public class TreeData : ScriptableObject
 {
     public string treeType;
     public Transform fruitPrefab;
-    public int baseProfit;
-    public int maxFruits;
+    public float baseProfit;
     public float growthTime;
 }

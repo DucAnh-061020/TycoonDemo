@@ -15,5 +15,4 @@ MonoBehaviour:
   treeType: BasicTree
   fruitPrefab: {fileID: 431050899200795660, guid: 7f43ad0a1dc9942deb52963a8ee6e6f4, type: 3}
   baseProfit: 100
-  maxFruits: 3
-  growthTime: 3
+  growthTime: 0.5

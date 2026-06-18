@@ -63,15 +63,13 @@ public class DelivererAI : MonoBehaviour, IPoolableObjects
             CustomerAI customerToServe = _targetDock.PrepareTransaction();
             if (customerToServe != null)
             {
-                int fruitsToSell = _fruitStack.Count;
-
                 while (_fruitStack.Count > 0)
                 {
                     Fruit fruit = _fruitStack.Pop();
+                    CurrencyManager.Instance.AddMoney(fruit.SellPrice);
                     yield return StartCoroutine(FruitTransferUtility.TransferRoutine(fruit, customerToServe.FruitStack, 12f));
                 }
 
-                CurrencyManager.Instance.AddMoney(fruitsToSell * 15);
                 customerToServe.ReceiveOrder();
                 _shouldRetire = true;
             }
