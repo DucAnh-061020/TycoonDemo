@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5232027997969558679}
   - component: {fileID: 7982015490184028161}
+  - component: {fileID: 228757726872536002}
   m_Layer: 5
   m_Name: EffPay
   m_TagString: Untagged
@@ -46,6 +47,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4690974855142316733}
   m_CullTransparentMesh: 1
+--- !u!114 &228757726872536002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4690974855142316733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2127ef2db30f91f449647f2f0e2e8dfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolIndex: 5
+  _timeToLive: 3
 --- !u!1001 &4204696012742242242
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class CustomerAI : MonoBehaviour, IPoolableObjects
     [SerializeField] private int _poolIndex;
     [SerializeField] private AgentVisuals _visuals;
     [SerializeField] private FruitStack _fruitStack;
+    [SerializeField] private Transform _collectCoinEffect;
     private Market _market;
     private Dock _assignedDock;
     private bool _isServed = false;
@@ -45,5 +46,9 @@ public class CustomerAI : MonoBehaviour, IPoolableObjects
     public void ReceiveOrder()
     {
         _isServed = true;
+        if (_collectCoinEffect.TryGetComponent<VfxEffect>(out var effect))
+        {
+            PoolManager.Instance.Spawn(_collectCoinEffect.gameObject, transform.position, Quaternion.identity, effect.PoolIndex);
+        }
     }
 }

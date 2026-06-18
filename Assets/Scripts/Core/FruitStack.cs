@@ -37,6 +37,14 @@ public class FruitStack : MonoBehaviour
         return null;
     }
 
+    public void UpdateNewPrice(float price)
+    {
+        foreach (var item in stack)
+        {
+            item.SetPrice(price);
+        }
+    }
+
     public void ClearAndDestroyStack()
     {
         while (stack.Count > 0)

@@ -81,6 +81,8 @@ MonoBehaviour:
   _treeData: {fileID: 11400000, guid: 5265e509a4dbb7849adddfd2321c82eb, type: 2}
   _unlockTime: 5
   _animation: {fileID: 6883174531985178943}
+  _uiFocusPoint: {fileID: 6471108813305689552}
+  _onSpawnEffect: {fileID: 7227778180726796439, guid: cd10bc0bf46e44b8692b0ebd17569541, type: 3}
 --- !u!65 &8421482495197989268
 BoxCollider:
   m_ObjectHideFlags: 0

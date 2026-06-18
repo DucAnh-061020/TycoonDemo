@@ -23,14 +23,26 @@ public class InteractionManager : MonoBehaviour
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, _maxRaycastDst))
+        if (!Physics.Raycast(ray, out hit, _maxRaycastDst))
         {
-            IClickable clickable = hit.collider.GetComponent<IClickable>();
+            return;
+        }
 
-            if (clickable != null)
-            {
-                clickable.OnClick();
-            }
+        if (!hit.collider.TryGetComponent<ISelectableTarget>(out var selectableTarget))
+        {
+            return;
+        }
+
+        if (hit.collider.TryGetComponent(out IUpgradable upgradable))
+        {
+            OverlayCanvasManager.Instance.UpgradeUI.SetData(upgradable.CurrentLevel, upgradable.MaxLevel, upgradable.Name, upgradable.Income, upgradable.Growtime, upgradable.UiFocusPoint, upgradable.Execute);
+            return;
+        }
+
+        if (hit.collider.TryGetComponent(out IUnlockable unlockable))
+        {
+            OverlayCanvasManager.Instance.ContructionUI.SetUnlockInfo(unlockable.Name, unlockable.UnlockPrice, unlockable.UiFocusPoint, unlockable.ItemImage, unlockable.Execute);
+            return;
         }
     }
 }

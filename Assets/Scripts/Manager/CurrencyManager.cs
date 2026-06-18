@@ -6,6 +6,7 @@ public class CurrencyManager : MonoBehaviour
 
     [SerializeField] private int startingMoney = 500;
     private float currentMoney;
+    public float CurrentMoney => currentMoney;
 
     public event System.Action<float> OnMoneyChanged;
 

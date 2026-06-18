@@ -7,4 +7,8 @@ public class TreeData : ScriptableObject
     public Transform fruitPrefab;
     public float baseProfit;
     public float growthTime;
+    public float upgradeCost;
+    public float createCost;
+    public int maxLevel;
+    public Sprite productImage;
 }

@@ -1343,6 +1343,7 @@ MonoBehaviour:
   _poolIndex: 0
   _visuals: {fileID: 57071328094487504}
   _fruitStack: {fileID: 5118383682655387073}
+  _collectCoinEffect: {fileID: 5232027997969558679, guid: 72af2805ca5894e36b7b259694c36e89, type: 3}
 --- !u!114 &57071328094487504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1368,13 +1369,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 785712d07f4a28a45812028e0c7a3ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useFixedSlots: 1
   fixedSlots:
   - {fileID: 6189031941684784857}
   - {fileID: 2134864908244946697}
   - {fileID: 6514167691253798742}
-  stackAnchor: {fileID: 0}
-  verticalSpacing: 0.22
 --- !u!1 &5693225996506118139
 GameObject:
   m_ObjectHideFlags: 0

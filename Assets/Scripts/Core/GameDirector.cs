@@ -29,13 +29,13 @@ public class GameDirector : MonoBehaviour
 
     private void OnEnable()
     {
-        UnlockableSlot.OnTreeUnlocked += HandleTreeUnlocked;
+        EventsBroker.OnTreeUnlocked += HandleTreeUnlocked;
         EventsBroker.OnMaxBuyersIncreased += HandleMaxBuyersIncreased;
     }
 
     private void OnDisable()
     {
-        UnlockableSlot.OnTreeUnlocked -= HandleTreeUnlocked;
+        EventsBroker.OnTreeUnlocked -= HandleTreeUnlocked;
         EventsBroker.OnMaxBuyersIncreased -= HandleMaxBuyersIncreased;
     }
 

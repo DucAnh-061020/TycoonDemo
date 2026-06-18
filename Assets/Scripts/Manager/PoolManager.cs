@@ -38,7 +38,9 @@ public class PoolManager : MonoBehaviour
         }
 
         GameObject spawnedObject = pools[indexKey].Get();
-        spawnedObject.transform.SetParent(parent, true);
+        spawnedObject.transform.SetParent(parent, false);
+        spawnedObject.transform.localScale = Vector3.one;
+        spawnedObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
         spawnedObject.transform.SetPositionAndRotation(position, rotation);
         return spawnedObject;
     }

@@ -1,10 +1,15 @@
 using UnityEngine;
 
-public class Tree : MonoBehaviour, IClickable, IPoolableObjects
+public class Tree : MonoBehaviour, IUpgradable, IPoolableObjects
 {
+    [Header("UI Focus Anchor")]
+    [SerializeField] private Transform _uiFocusPoint;
+
+    [Space(5)]
     [SerializeField] private int _poolIndex;
     [SerializeField] private Transform _gatherPoint;
     [SerializeField] private FruitStack _fruitStack;
+    [SerializeField] private Transform _upgradeEffect;
     private TreeData _data;
     private int _currentFruits;
     private int _currentLevel = 1;
@@ -12,11 +17,19 @@ public class Tree : MonoBehaviour, IClickable, IPoolableObjects
     public Transform GatherPoint => _gatherPoint;
     public int PoolIndex => _poolIndex;
     public FruitStack FruitStack => _fruitStack;
+    public int CurrentLevel => _currentLevel;
+    public int MaxLevel => _data.maxLevel;
+    public string Name => _data.treeType;
+    public float Income => _currentPrice;
+    public float Growtime => _data.growthTime;
+    public Vector3 UiFocusPoint => _uiFocusPoint.position;
+    public Sprite ItemImage => _data.productImage;
 
     public void Initialize(TreeData treeData)
     {
         _data = treeData;
         _currentPrice = _data.baseProfit;
+        EventsBroker.OnTreeUpdate?.Invoke(UiFocusPoint, this);
         StartCoroutine(FruitGrowthRoutine());
     }
 
@@ -31,7 +44,7 @@ public class Tree : MonoBehaviour, IClickable, IPoolableObjects
                 Vector3 localPos = _fruitStack.GetTargetPosition();
 
                 Fruit fruitData = _data.fruitPrefab.GetComponent<Fruit>();
-                GameObject fruit = PoolManager.Instance.Spawn(_data.fruitPrefab.gameObject, slot.position, Quaternion.identity,fruitData.PoolIndex);
+                GameObject fruit = PoolManager.Instance.Spawn(_uiFocusPoint,_data.fruitPrefab.gameObject, slot.position, Quaternion.identity,fruitData.PoolIndex);
                 fruit.transform.position = localPos;
                 Fruit fruitInfo = fruit.GetComponent<Fruit>();
                 fruitInfo.SetPrice(_currentPrice);
@@ -45,12 +58,6 @@ public class Tree : MonoBehaviour, IClickable, IPoolableObjects
         int fruitsToGive = _currentFruits;
         _currentFruits = 0;
         return fruitsToGive;
-    }
-
-    public void OnClick()
-    {
-        _currentLevel++;
-        _currentPrice = _currentPrice + _data.baseProfit * 0.1f;
     }
 
     private float typeProfitMultiplier = 1.0f;
@@ -78,9 +85,29 @@ public class Tree : MonoBehaviour, IClickable, IPoolableObjects
         }
     }
 
-    public int CalculateProfit(int fruits)
+    public int CalculateProfit()
     {
-        float baseCalculation = fruits * _data.baseProfit * _currentLevel;
+        float baseCalculation = _data.baseProfit * _currentLevel;
         return Mathf.RoundToInt(baseCalculation * typeProfitMultiplier * globalProfitMultiplier);
+    }
+
+    public void Execute()
+    {
+        if (CurrencyManager.Instance.TrySpend(_data.upgradeCost))
+        {
+            Upgrade();
+            EventsBroker.OnTreeUpdate?.Invoke(UiFocusPoint, this);
+        }
+    }
+
+    private void Upgrade()
+    {
+        _currentLevel++;
+        _currentPrice = CalculateProfit();
+        _fruitStack.UpdateNewPrice(_currentPrice);
+        if (_upgradeEffect.TryGetComponent<VfxEffect>(out var effect))
+        {
+            PoolManager.Instance.Spawn(_upgradeEffect.gameObject, transform.position, Quaternion.identity, effect.PoolIndex);
+        }
     }
 }
