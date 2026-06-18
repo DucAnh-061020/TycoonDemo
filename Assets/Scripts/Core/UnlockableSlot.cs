@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class UnlockableSlot : MonoBehaviour, IClickable
 {
-    [SerializeField] private TreeData treeData;
-    [SerializeField] private float unlockTime = 5f;
+    [SerializeField] private TreeData _treeData;
+    [SerializeField] private float _unlockTime = 5f;
+    [SerializeField] private Animation _animation;
     private bool isUnlocking = false;
     private bool isUnlocked = false;
 
@@ -13,6 +14,7 @@ public class UnlockableSlot : MonoBehaviour, IClickable
     {
         if (!isUnlocking && !isUnlocked && CurrencyManager.Instance.TrySpend(100))
         {
+            _animation.Play("BoxOpen");
             StartCoroutine(UnlockSequence());
         }
     }
@@ -20,12 +22,12 @@ public class UnlockableSlot : MonoBehaviour, IClickable
     private System.Collections.IEnumerator UnlockSequence()
     {
         isUnlocking = true;
-        yield return new WaitForSeconds(unlockTime);
+        yield return new WaitForSeconds(_unlockTime);
 
         isUnlocked = true;
         isUnlocking = false;
 
-        OnTreeUnlocked?.Invoke(treeData, this.transform);
+        OnTreeUnlocked?.Invoke(_treeData, this.transform);
         Destroy(gameObject);
     }
 }

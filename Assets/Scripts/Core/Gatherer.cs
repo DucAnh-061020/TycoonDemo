@@ -24,7 +24,7 @@ public class Gatherer : MonoBehaviour
             if (inventory > 0)
             {
                 // Walk to Market
-                yield return MoveTo(targetMarket.InteractionPoint.position);
+                yield return MoveTo(targetMarket.WaitingPoint.position);
                 targetMarket.DepositFruits(inventory);
                 inventory = 0;
             }

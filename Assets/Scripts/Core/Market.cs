@@ -1,27 +1,36 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Market : MonoBehaviour, IStorageLocation
+public class Market : MonoBehaviour
 {
-    [SerializeField] private Transform entryPoint;
-    [SerializeField] private Transform exitPoint;
-    [SerializeField] private Transform tradingPoint;
+    [SerializeField] private Transform _entryPoint;
+    [SerializeField] private Transform _exitPoint;
+    [SerializeField] private Transform _retirePoint;
+    [SerializeField] private List<Dock> _docks;
 
-    public Transform InteractionPoint => tradingPoint;
-    public Transform EntryPoint => entryPoint;
-    public Transform ExitPoint => exitPoint;
+    public Transform EntryPoint => _entryPoint;
+    public Transform ExitPoint => _exitPoint;
+    public Transform RetirePoint => _retirePoint;
 
-    private int totalFruitsInMarket;
-
-    public void DepositFruits(int amount)
+    public Dock GetAvailableDock()
     {
-        totalFruitsInMarket += amount;
-        // Process cash reward immediately or wait for buyer
+        if (_docks == null || _docks.Count == 0) return null;
+        return _docks[Random.Range(0, _docks.Count)];
     }
 
-    public int WithdrawFruits(int amount)
+    public bool TryReserveAnyCustomer(out Dock availableDock)
     {
-        int taken = Mathf.Min(amount, totalFruitsInMarket);
-        totalFruitsInMarket -= taken;
-        return taken;
+        availableDock = null;
+
+        for (int i = 0; i < _docks.Count; i++)
+        {
+            if (_docks[i].TryReserveCustomer())
+            {
+                availableDock = _docks[i];
+                return true;
+            }
+        }
+
+        return false;
     }
 }

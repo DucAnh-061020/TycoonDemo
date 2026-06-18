@@ -2,7 +2,8 @@ using UnityEngine;
 
 public interface IStorageLocation
 {
-    Transform InteractionPoint { get; }
+    Transform WaitingPoint { get; }
+    Transform DeliverPoint { get; }
     void DepositFruits(int amount);
     int WithdrawFruits(int amount);
 }

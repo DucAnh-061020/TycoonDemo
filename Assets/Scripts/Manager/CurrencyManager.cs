@@ -3,31 +3,36 @@ using UnityEngine;
 public class CurrencyManager : MonoBehaviour
 {
     public static CurrencyManager Instance { get; private set; }
-    private int currentBalance;
+
+    [SerializeField] private int startingMoney = 500;
+    private int currentMoney;
+
+    public System.Action<int> OnMoneyChanged;
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         Instance = this;
-    }
-
-    private void OnDestroy()
-    {
-        if (Instance == this) Instance = null;
+        currentMoney = startingMoney;
     }
 
     public bool TrySpend(int amount)
     {
-        if (currentBalance >= amount)
+        return true;
+        if (currentMoney >= amount)
         {
-            currentBalance -= amount;
+            currentMoney -= amount;
+            OnMoneyChanged?.Invoke(currentMoney);
+            Debug.Log($"Spent {amount}. Current Money: {currentMoney}");
             return true;
         }
+        Debug.Log("Not enough money!");
         return false;
+    }
+
+    public void AddMoney(int amount)
+    {
+        currentMoney += amount;
+        OnMoneyChanged?.Invoke(currentMoney);
+        Debug.Log($"Earned {amount}. Current Money: {currentMoney}");
     }
 }
