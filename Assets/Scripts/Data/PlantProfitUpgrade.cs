@@ -5,9 +5,9 @@ public class PlantProfitUpgrade : UpgradableData
 {
     public string plantName;
     public Transform fruitPrefab;
-    public float baseProfit;
+    public double baseProfit;
     public float growthTime;
-    public float createCost;
+    public double createCost;
     public UpgradeTier[] localTiers;
 
     public override void ApplyUpgrade(float value)

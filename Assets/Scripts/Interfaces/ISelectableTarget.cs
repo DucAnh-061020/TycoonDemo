@@ -9,7 +9,7 @@ public interface ISelectableTarget
 public interface IUnlockable : ISelectableTarget
 {
     string Name { get; }
-    float UnlockPrice { get; }
+    double UnlockPrice { get; }
     void Execute();
 }
 
@@ -18,8 +18,9 @@ public interface IUpgradable : ISelectableTarget
     int CurrentLevel { get; }
     int MaxLevel { get; }
     string Name { get; }
-    float Income { get; }
+    double Income { get; }
     float Growtime { get; }
+    double UpgradeCost { get; }
 
     void Execute();
 }

@@ -35,7 +35,7 @@ public class InteractionManager : MonoBehaviour
 
         if (hit.collider.TryGetComponent(out IUpgradable upgradable))
         {
-            OverlayCanvasManager.Instance.UpgradeUI.SetData(upgradable.CurrentLevel, upgradable.MaxLevel, upgradable.Name, upgradable.Income, upgradable.Growtime, upgradable.UiFocusPoint, upgradable.Execute);
+            OverlayCanvasManager.Instance.UpgradeUI.SetData(upgradable.CurrentLevel, upgradable.MaxLevel, upgradable.Name, upgradable.Income, upgradable.UpgradeCost, upgradable.Growtime, upgradable.UiFocusPoint, upgradable.Execute);
             return;
         }
 

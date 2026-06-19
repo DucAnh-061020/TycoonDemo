@@ -16,8 +16,8 @@ public class MoneyUI : MonoBehaviour
         CurrencyManager.Instance.OnMoneyChanged -= Instance_OnMoneyChanged;
     }
 
-    private void Instance_OnMoneyChanged(float newValue)
+    private void Instance_OnMoneyChanged(double newValue)
     {
-        _coin.text = newValue.ToString();
+        _coin.text = CurrencyFormatter.FormatValue(newValue);
     }
 }

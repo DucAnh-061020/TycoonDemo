@@ -6,6 +6,7 @@ public class DelivererAI : MonoBehaviour, IPoolableObjects
     [SerializeField] private int _poolIndex = 1;
     [SerializeField] private AgentVisuals _visuals;
     [SerializeField] private FruitStack _fruitStack;
+    [SerializeField] private AgentNavMeshMotor _motor;
     private Market _market;
     private Dock _targetDock;
     private Tree _targetTree;
@@ -31,7 +32,8 @@ public class DelivererAI : MonoBehaviour, IPoolableObjects
             {
                 _visuals.SetPocket(true);
                 _visuals.SetMovement(true);
-                yield return MovementUtility.MoveToTarget(transform, _targetTree.GatherPoint.position, _moveSpeed);
+                yield return _motor.MoveToTargetRoutine(_targetTree.GatherPoint.position, _moveSpeed);
+                //yield return MovementUtility.MoveToTarget(transform, _targetTree.GatherPoint.position, _moveSpeed);
                 transform.LookAt(_targetTree.transform);
                 _visuals.SetMovement(false);
 
@@ -56,7 +58,7 @@ public class DelivererAI : MonoBehaviour, IPoolableObjects
                 yield return new WaitForSeconds(0.2f);
             }
             _visuals.SetMovement(true);
-            yield return MovementUtility.MoveToTarget(transform, _targetDock.DeliverPoint.position, _moveSpeed);
+            yield return _motor.MoveToTargetRoutine(_targetDock.DeliverPoint.position, _moveSpeed);
             transform.LookAt(_targetDock.WaitingPoint);
             _visuals.SetMovement(false);
             while (!_targetDock.PrepareToBuy().IsBuying)
@@ -82,7 +84,8 @@ public class DelivererAI : MonoBehaviour, IPoolableObjects
         _visuals.SetMovement(true);
         _visuals.SetPocket(true);
         GameDirector.Instance.NotifyDelivererRetired(_targetTree);
-        yield return MovementUtility.MoveToTarget(transform, _market.RetirePoint.position, _moveSpeed);
+        yield return _motor.MoveToTargetRoutine(_market.RetirePoint.position, _moveSpeed);
+        _motor.DisableSimulation();
         PoolManager.Instance.Release(gameObject, _poolIndex);
     }
 }

@@ -93,7 +93,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 431050899201095724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14cb937183d53d3449331d3e542e5f1e, type: 3}
+  m_Script: {fileID: 11500000, guid: c78e93a9723d82545b9d760b364ac574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _poolIndex: 3
+  _sellPrice: 0

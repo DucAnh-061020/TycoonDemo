@@ -25,7 +25,7 @@ public class ContructionUI : MonoBehaviour, IUIFlowControl
         gameObject.SetActive(false);
     }
 
-    public void SetUnlockInfo(string name, float price, Vector3 position, Sprite itemImage, System.Action callBack)
+    public void SetUnlockInfo(string name, double price, Vector3 position, Sprite itemImage, System.Action callBack)
     {
         if (_isOpen) return;
         ToggleMenu();
@@ -38,7 +38,7 @@ public class ContructionUI : MonoBehaviour, IUIFlowControl
         _itemImage.sprite = itemImage;
         gameObject.SetActive(true);
         _productNameText.text = name;
-        _unlockPriceText.text = price.ToString();
+        _unlockPriceText.text = CurrencyFormatter.FormatValue(price);
         _rectTransform.anchoredPosition = _offset + UICoordinateUtility.WorldToOverlayCanvasPosition(position, Camera.main, _canvas);
     }
 

@@ -11,7 +11,7 @@ public class UnlockableSlot : MonoBehaviour, IUnlockable
     private bool _isUnlocked = false;
 
     public string Name => _treeData.plantName;
-    public float UnlockPrice => _treeData.createCost;
+    public double UnlockPrice => _treeData.createCost;
     public Vector3 UiFocusPoint => _uiFocusPoint.position;
     public Sprite ItemImage => _treeData.displayImage;
 

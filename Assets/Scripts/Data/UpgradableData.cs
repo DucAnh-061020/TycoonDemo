@@ -29,6 +29,6 @@ public abstract class UpgradableData : ScriptableObject
 [System.Serializable]
 public class UpgradeTier
 {
-    public float cost;
+    public double cost;
     public float modifierValue;
 }

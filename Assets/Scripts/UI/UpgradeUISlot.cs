@@ -32,7 +32,7 @@ public class UpgradeUISlot : MonoBehaviour
         else
         {
             UpgradeTier nextTier = upgrade.GetNextTier();
-            costText.text = $"${nextTier.cost}";
+            costText.text = $"{CurrencyFormatter.FormatValue(nextTier.cost)}";
             purchaseButton.interactable = true;
         }
         upgradeImage.sprite = upgrade.displayImage;

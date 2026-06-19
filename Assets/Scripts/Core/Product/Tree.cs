@@ -13,17 +13,18 @@ public class Tree : MonoBehaviour, IUpgradable, IPoolableObjects
     private PlantProfitUpgrade _data;
     private int _currentFruits;
     private int _currentLevel = 1;
-    private float _currentPrice;
+    private double _currentPrice;
     public Transform GatherPoint => _gatherPoint;
     public int PoolIndex => _poolIndex;
     public FruitStack FruitStack => _fruitStack;
     public int CurrentLevel => _currentLevel;
     public int MaxLevel => _data.localTiers.Length;
     public string Name => _data.plantName;
-    public float Income => _currentPrice;
+    public double Income => _currentPrice;
     public float Growtime => _data.growthTime;
     public Vector3 UiFocusPoint => _uiFocusPoint.position;
     public Sprite ItemImage => _data.displayImage;
+    public double UpgradeCost => _data.localTiers[Mathf.Min(_currentLevel, _data.localTiers.Length - 1)].cost;
 
     public void Initialize(PlantProfitUpgrade treeData)
     {
@@ -85,13 +86,13 @@ public class Tree : MonoBehaviour, IUpgradable, IPoolableObjects
         EventsBroker.OnTreeUpdate?.Invoke(UiFocusPoint, this);
     }
 
-    public int CalculateProfit()
+    public double CalculateProfit()
     {
-        float localMultiply = _data.localTiers[Mathf.Min(_currentLevel - 1, _data.localTiers.Length - 1)].modifierValue;
-        float shareMultiply = _data.tiers[_data.currentLevel].modifierValue;
-        float baseCalculation = _data.baseProfit * localMultiply
+        double localMultiply = _data.localTiers[Mathf.Min(_currentLevel - 1, _data.localTiers.Length - 1)].modifierValue;
+        double shareMultiply = _data.tiers[Mathf.Min(_data.currentLevel, _data.tiers.Count - 1)].modifierValue;
+        double baseCalculation = _data.baseProfit * localMultiply
             * shareMultiply * GlobalUpgradeManager.Instance.GlobalProfitMultiply;
-        return Mathf.RoundToInt(baseCalculation);
+        return System.Math.Round(baseCalculation);
     }
 
     public void Execute()

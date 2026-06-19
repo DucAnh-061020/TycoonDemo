@@ -9,6 +9,7 @@ public class ProductUpgradeUI : MonoBehaviour, IUIFlowControl
     [SerializeField] private TextMeshProUGUI _productNameText;
     [SerializeField] private TextMeshProUGUI _incomeText;
     [SerializeField] private TextMeshProUGUI _growText;
+    [SerializeField] private TextMeshProUGUI _upgradeCostText;
     [SerializeField] private Slider _levelProgressBar;
     [SerializeField] private Vector2 _offset;
     [SerializeField] private Button _closeBtn;
@@ -28,12 +29,12 @@ public class ProductUpgradeUI : MonoBehaviour, IUIFlowControl
         gameObject.SetActive(false);
     }
 
-    public void SetData(int currentLevel, int maxLevel, string productName, float income, float growTime, Vector3 worldPosition, System.Action callback)
+    public void SetData(int currentLevel, int maxLevel, string productName, double income, double cost, float growTime, Vector3 worldPosition, System.Action callback)
     {
         if (_isOpen) return;
         ToggleMenu();
-        _upgradeBtn.gameObject.SetActive(maxLevel > currentLevel);
-        _maxBtn.gameObject.SetActive(maxLevel == currentLevel);
+        _upgradeCostText.gameObject.SetActive(maxLevel > currentLevel);
+        _maxBtn.gameObject.SetActive(maxLevel <= currentLevel);
         _upgradeBtn.onClick.RemoveAllListeners();
         _upgradeBtn.onClick.AddListener(() =>
         {
@@ -41,12 +42,13 @@ public class ProductUpgradeUI : MonoBehaviour, IUIFlowControl
             callback?.Invoke();
         });
         _growText.text = growTime.ToString();
-        _incomeText.text = income.ToString();
+        _incomeText.text = CurrencyFormatter.FormatValue(income);
         _levelText.text = currentLevel.ToString();
         _productNameText.text = productName;
         _levelProgressBar.maxValue = maxLevel;
         _levelProgressBar.value = currentLevel;
         _levelProgressBar.minValue = 1;
+        _upgradeCostText.text = CurrencyFormatter.FormatValue(cost);
         _rectTransform.anchoredPosition = UICoordinateUtility.WorldToOverlayCanvasPosition(worldPosition, Camera.main, _canvas) + _offset;
     }
 

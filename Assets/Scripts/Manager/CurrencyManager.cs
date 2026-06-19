@@ -5,10 +5,10 @@ public class CurrencyManager : MonoBehaviour
     public static CurrencyManager Instance { get; private set; }
 
     [SerializeField] private int startingMoney = 500;
-    private float currentMoney;
-    public float CurrentMoney => currentMoney;
+    private double currentMoney;
+    public double CurrentMoney => currentMoney;
 
-    public event System.Action<float> OnMoneyChanged;
+    public event System.Action<double> OnMoneyChanged;
 
     private void Awake()
     {
@@ -16,7 +16,7 @@ public class CurrencyManager : MonoBehaviour
         currentMoney = startingMoney;
     }
 
-    public bool TrySpend(float amount)
+    public bool TrySpend(double amount)
     {
         if (currentMoney >= amount)
         {
@@ -29,7 +29,7 @@ public class CurrencyManager : MonoBehaviour
         return true; //For debug
     }
 
-    public void AddMoney(float amount)
+    public void AddMoney(double amount)
     {
         currentMoney += amount;
         OnMoneyChanged?.Invoke(currentMoney);

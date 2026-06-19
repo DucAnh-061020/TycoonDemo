@@ -37,7 +37,7 @@ public class FruitStack : MonoBehaviour
         return null;
     }
 
-    public void UpdateNewPrice(float price)
+    public void UpdateNewPrice(double price)
     {
         foreach (var item in stack)
         {

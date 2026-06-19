@@ -1302,7 +1302,7 @@ GameObject:
   - component: {fileID: 6540654423376592508}
   - component: {fileID: -3762017021484536239}
   - component: {fileID: 57071328094487504}
-  - component: {fileID: 5118383682655387073}
+  - component: {fileID: 5940280704784568728}
   m_Layer: 0
   m_Name: Customer
   m_TagString: Untagged
@@ -1336,14 +1336,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5081378640111839596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1152fb53b664c14c99d5e46983f4df9, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cd839b58cd66344a8224a01a43811cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 4
-  _poolIndex: 0
-  _visuals: {fileID: 57071328094487504}
-  _fruitStack: {fileID: 5118383682655387073}
-  _collectCoinEffect: {fileID: 5232027997969558679, guid: 72af2805ca5894e36b7b259694c36e89, type: 3}
+  _animator: {fileID: 1677055900559989277}
 --- !u!114 &57071328094487504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1353,11 +1349,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5081378640111839596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9600631643fb9054789b738b143bd473, type: 3}
+  m_Script: {fileID: 11500000, guid: 52186c10842b2064f8b0304d87079d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 1677055900559989277}
---- !u!114 &5118383682655387073
+  _moveSpeed: 4
+  _poolIndex: 0
+  _visuals: {fileID: -3762017021484536239}
+  _fruitStack: {fileID: 5940280704784568728}
+  _collectCoinEffect: {fileID: 5232027997969558679, guid: 72af2805ca5894e36b7b259694c36e89, type: 3}
+--- !u!114 &5940280704784568728
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1366,7 +1366,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5081378640111839596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 785712d07f4a28a45812028e0c7a3ce1, type: 3}
+  m_Script: {fileID: 11500000, guid: 645d8d42a5f779b448b92f5f5963a91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fixedSlots:

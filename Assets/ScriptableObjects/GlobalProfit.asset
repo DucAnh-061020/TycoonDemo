@@ -18,8 +18,8 @@ MonoBehaviour:
   tiers:
   - cost: 10000
     modifierValue: 2
-  - cost: 100000
+  - cost: 10000000
     modifierValue: 3
-  currentLevel: 0
+  currentLevel: 2
   displayImage: {fileID: 21300000, guid: 76d5a2b234d9c46269a85ad106e0fe10, type: 3}
   globalType: 1

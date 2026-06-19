@@ -188,6 +188,7 @@ MonoBehaviour:
   _productNameText: {fileID: 6415197139508540439}
   _incomeText: {fileID: 8531823355435579015}
   _growText: {fileID: 4730015122797309853}
+  _upgradeCostText: {fileID: 8208875674965538370}
   _levelProgressBar: {fileID: 4417621202779080690}
   _offset: {x: 0, y: 0}
   _closeBtn: {fileID: 434146147780046328}

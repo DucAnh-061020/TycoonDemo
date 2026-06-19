@@ -75,11 +75,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4339762009353407341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a25baa736c8c22a45b3bb74e530c146b, type: 3}
+  m_Script: {fileID: 11500000, guid: 85fe6147786636b48992b596807b0dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deliverPoint: {fileID: 2144722927855898522}
   waitingPoint: {fileID: 2249413391798620966}
+  deliverPoint: {fileID: 2144722927855898522}
 --- !u!1 &7811026255124237267
 GameObject:
   m_ObjectHideFlags: 0

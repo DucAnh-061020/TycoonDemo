@@ -493,7 +493,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5081378640111839596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08f40c28236d1fa4a98d7eac7de88715, type: 3}
+  m_Script: {fileID: 11500000, guid: 9cead00e6c5a37248820317abb9612af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _uiFocusPoint: {fileID: 2565548378552595683}
@@ -510,7 +510,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5081378640111839596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 785712d07f4a28a45812028e0c7a3ce1, type: 3}
+  m_Script: {fileID: 11500000, guid: 645d8d42a5f779b448b92f5f5963a91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fixedSlots:

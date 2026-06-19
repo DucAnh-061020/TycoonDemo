@@ -3,10 +3,10 @@ using UnityEngine;
 public class Fruit : MonoBehaviour, IPoolableObjects
 {
     [SerializeField] private int _poolIndex;
-    [SerializeField] private float _sellPrice;
+    [SerializeField] private double _sellPrice;
     public int PoolIndex => _poolIndex;
-    public float SellPrice => _sellPrice;
-    public void SetPrice(float price)
+    public double SellPrice => _sellPrice;
+    public void SetPrice(double price)
     {
         _sellPrice = price;
     }
