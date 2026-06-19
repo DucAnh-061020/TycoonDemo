@@ -15,6 +15,15 @@ public class Market : MonoBehaviour
     public Dock GetAvailableDock()
     {
         if (_docks == null || _docks.Count == 0) return null;
+
+        foreach (Dock dock in _docks)
+        {
+            if (!dock.HasWaitingCustomer)
+            {
+                return dock;
+            }
+        }
+
         return _docks[Random.Range(0, _docks.Count)];
     }
 

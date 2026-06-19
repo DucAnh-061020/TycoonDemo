@@ -105,7 +105,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a17ebc84d1a1be40bbf6416bdd8ca73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _optionHolder: {fileID: 4405951899791727024}
+  slotPrefab: {fileID: 5346751946907031022, guid: 37a1f9ee4140b40c5b9c020a7137b0c1, type: 3}
+  slotContainer: {fileID: 4405951899791727024}
+  _availableUpgrades:
+  - {fileID: 11400000, guid: 441430f6b1868864ab3791a9091e71f4, type: 2}
+  - {fileID: 11400000, guid: aed910ec68e3b64498b128b947c4d870, type: 2}
+  - {fileID: 11400000, guid: 6f8a99667a1f3644db7acce421a56927, type: 2}
+  - {fileID: 11400000, guid: 300e5587ad643de458de457f03b3bb1e, type: 2}
+  - {fileID: 11400000, guid: 0be569bb24d6bd54283dbbe9c9981a45, type: 2}
+  - {fileID: 11400000, guid: 163ed05f9cfa6394d8754cff68ea41e7, type: 2}
 --- !u!1 &2244424146237259503
 GameObject:
   m_ObjectHideFlags: 0

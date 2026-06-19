@@ -25,7 +25,7 @@ public class ProgressUIOverlay : MonoBehaviour, IPoolableObjects
     {
         _progressValue += Time.deltaTime;
         _progressSlider.value = _progressValue;
-        _progressText.text = $"{_progressSlider.maxValue - _progressValue}s";
+        _progressText.text = $"{_progressSlider.maxValue - _progressValue:N2}s";
         if (_progressValue >= _progressSlider.maxValue)
         {
             PoolManager.Instance.Release(gameObject, _poolIndex);

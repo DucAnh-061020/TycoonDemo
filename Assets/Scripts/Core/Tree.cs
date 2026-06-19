@@ -10,7 +10,7 @@ public class Tree : MonoBehaviour, IUpgradable, IPoolableObjects
     [SerializeField] private Transform _gatherPoint;
     [SerializeField] private FruitStack _fruitStack;
     [SerializeField] private Transform _upgradeEffect;
-    private TreeData _data;
+    private PlantProfitUpgrade _data;
     private int _currentFruits;
     private int _currentLevel = 1;
     private float _currentPrice;
@@ -18,14 +18,14 @@ public class Tree : MonoBehaviour, IUpgradable, IPoolableObjects
     public int PoolIndex => _poolIndex;
     public FruitStack FruitStack => _fruitStack;
     public int CurrentLevel => _currentLevel;
-    public int MaxLevel => _data.maxLevel;
-    public string Name => _data.treeType;
+    public int MaxLevel => _data.localTiers.Length;
+    public string Name => _data.plantName;
     public float Income => _currentPrice;
     public float Growtime => _data.growthTime;
     public Vector3 UiFocusPoint => _uiFocusPoint.position;
-    public Sprite ItemImage => _data.productImage;
+    public Sprite ItemImage => _data.displayImage;
 
-    public void Initialize(TreeData treeData)
+    public void Initialize(PlantProfitUpgrade treeData)
     {
         _data = treeData;
         _currentPrice = _data.baseProfit;
@@ -44,7 +44,7 @@ public class Tree : MonoBehaviour, IUpgradable, IPoolableObjects
                 Vector3 localPos = _fruitStack.GetTargetPosition();
 
                 Fruit fruitData = _data.fruitPrefab.GetComponent<Fruit>();
-                GameObject fruit = PoolManager.Instance.Spawn(_uiFocusPoint,_data.fruitPrefab.gameObject, slot.position, Quaternion.identity,fruitData.PoolIndex);
+                GameObject fruit = PoolManager.Instance.Spawn(_uiFocusPoint, _data.fruitPrefab.gameObject, slot.position, Quaternion.identity, fruitData.PoolIndex);
                 fruit.transform.position = localPos;
                 Fruit fruitInfo = fruit.GetComponent<Fruit>();
                 fruitInfo.SetPrice(_currentPrice);
@@ -60,40 +60,43 @@ public class Tree : MonoBehaviour, IUpgradable, IPoolableObjects
         return fruitsToGive;
     }
 
-    private float typeProfitMultiplier = 1.0f;
-    private static float globalProfitMultiplier = 1.0f;
-
     private void OnEnable()
     {
         EventsBroker.OnProfitUpgradePurchased += HandleProfitUpgrade;
+        EventsBroker.OnGlobalUpgradePurchased += HandleGlobalUpgrade;
     }
 
     private void OnDisable()
     {
         EventsBroker.OnProfitUpgradePurchased -= HandleProfitUpgrade;
+        EventsBroker.OnGlobalUpgradePurchased -= HandleGlobalUpgrade;
     }
 
-    private void HandleProfitUpgrade(string targetType, float multiplierBonus)
+    private void HandleProfitUpgrade(string upgradeId, float multiplierBonus)
     {
-        if (targetType == "Global")
-        {
-            globalProfitMultiplier += multiplierBonus;
-        }
-        else if (_data != null && _data.treeType == targetType)
-        {
-            typeProfitMultiplier += multiplierBonus;
-        }
+        if (upgradeId != _data.upgradeId) return;
+        _currentPrice = CalculateProfit();
+        EventsBroker.OnTreeUpdate?.Invoke(UiFocusPoint, this);
+    }
+
+    private void HandleGlobalUpgrade()
+    {
+        _currentPrice = CalculateProfit();
+        EventsBroker.OnTreeUpdate?.Invoke(UiFocusPoint, this);
     }
 
     public int CalculateProfit()
     {
-        float baseCalculation = _data.baseProfit * _currentLevel;
-        return Mathf.RoundToInt(baseCalculation * typeProfitMultiplier * globalProfitMultiplier);
+        float localMultiply = _data.localTiers[Mathf.Min(_currentLevel - 1, _data.localTiers.Length - 1)].modifierValue;
+        float shareMultiply = _data.tiers[_data.currentLevel].modifierValue;
+        float baseCalculation = _data.baseProfit * localMultiply
+            * shareMultiply * GlobalUpgradeManager.Instance.GlobalProfitMultiply;
+        return Mathf.RoundToInt(baseCalculation);
     }
 
     public void Execute()
     {
-        if (CurrencyManager.Instance.TrySpend(_data.upgradeCost))
+        if (_currentLevel < _data.localTiers.Length && CurrencyManager.Instance.TrySpend(_data.localTiers[_currentLevel].cost))
         {
             Upgrade();
             EventsBroker.OnTreeUpdate?.Invoke(UiFocusPoint, this);

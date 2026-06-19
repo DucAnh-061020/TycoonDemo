@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UnlockableSlot : MonoBehaviour, IUnlockable
 {
-    [SerializeField] private TreeData _treeData;
+    [SerializeField] private PlantProfitUpgrade _treeData;
     [SerializeField] private float _unlockTime = 5f;
     [SerializeField] private Animation _animation;
     [SerializeField] private Transform _uiFocusPoint;
@@ -10,10 +10,10 @@ public class UnlockableSlot : MonoBehaviour, IUnlockable
     private bool _isUnlocking = false;
     private bool _isUnlocked = false;
 
-    public string Name => _treeData.treeType;
+    public string Name => _treeData.plantName;
     public float UnlockPrice => _treeData.createCost;
     public Vector3 UiFocusPoint => _uiFocusPoint.position;
-    public Sprite ItemImage => _treeData.productImage;
+    public Sprite ItemImage => _treeData.displayImage;
 
     public void Execute()
     {

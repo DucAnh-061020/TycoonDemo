@@ -3,7 +3,7 @@ using UnityEngine;
 public class DelivererAI : MonoBehaviour, IPoolableObjects
 {
     [SerializeField] private float _moveSpeed = 5f;
-    [SerializeField] private int _poolIndex = 1; 
+    [SerializeField] private int _poolIndex = 1;
     [SerializeField] private AgentVisuals _visuals;
     [SerializeField] private FruitStack _fruitStack;
     private Market _market;
@@ -59,7 +59,10 @@ public class DelivererAI : MonoBehaviour, IPoolableObjects
             yield return MovementUtility.MoveToTarget(transform, _targetDock.DeliverPoint.position, _moveSpeed);
             transform.LookAt(_targetDock.WaitingPoint);
             _visuals.SetMovement(false);
-
+            while (!_targetDock.PrepareToBuy().IsBuying)
+            {
+                yield return new WaitForEndOfFrame();
+            }
             CustomerAI customerToServe = _targetDock.PrepareTransaction();
             if (customerToServe != null)
             {

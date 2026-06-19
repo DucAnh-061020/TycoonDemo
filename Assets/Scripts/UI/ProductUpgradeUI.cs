@@ -32,7 +32,7 @@ public class ProductUpgradeUI : MonoBehaviour, IUIFlowControl
     {
         if (_isOpen) return;
         ToggleMenu();
-        _upgradeBtn.gameObject.SetActive(maxLevel < currentLevel);
+        _upgradeBtn.gameObject.SetActive(maxLevel > currentLevel);
         _maxBtn.gameObject.SetActive(maxLevel == currentLevel);
         _upgradeBtn.onClick.RemoveAllListeners();
         _upgradeBtn.onClick.AddListener(() =>

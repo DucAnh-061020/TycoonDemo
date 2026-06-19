@@ -494,6 +494,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5346751946907031022}
+  - component: {fileID: 5969908806335005665}
   m_Layer: 5
   m_Name: UpgradeItemView
   m_TagString: Untagged
@@ -526,6 +527,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 850, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5969908806335005665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4831415617780161006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c50dd85008227ac4caccf5a68d5d64f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleText: {fileID: 5283063716388966750}
+  descriptionText: {fileID: 3760308970618435473}
+  costText: {fileID: 1982800265358470436}
+  upgradeImage: {fileID: 1999780320073786022}
+  purchaseButton: {fileID: 1725631536697428881}
 --- !u!1 &5311292181791545853
 GameObject:
   m_ObjectHideFlags: 0

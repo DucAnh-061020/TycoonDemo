@@ -54,6 +54,6 @@ public class WorldSpaceCanvas : MonoBehaviour
         var infoObject = PoolManager.Instance.Spawn(transform, infoUI.gameObject, position + infoUI.Offset, transform.rotation, infoUI.PoolIndex);
         var newInfo = infoObject.GetComponent<InfoUIOverlay>();
         newInfo.UpdateOverlay(tree.Income, tree.Growtime, tree.ItemImage);
-        _overlayInfos.Add(newInfo.GetInstanceID(), newInfo);
+        _overlayInfos.Add(tree.GetInstanceID(), newInfo);
     }
 }

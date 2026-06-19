@@ -10,15 +10,16 @@ public class CustomerAI : MonoBehaviour, IPoolableObjects
     private Market _market;
     private Dock _assignedDock;
     private bool _isServed = false;
+    private bool _isBuying = false;
     public int PoolIndex => _poolIndex;
     public FruitStack FruitStack => _fruitStack;
-
+    public bool IsBuying => _isBuying;
     public void InitializeFromPool(Market market)
     {
-        this._market = market;
-        this._assignedDock = market.GetAvailableDock();
-        this._isServed = false;
-
+        _market = market;
+        _assignedDock = market.GetAvailableDock();
+        _isServed = false;
+        _isBuying = false;
         _fruitStack.ClearAndDestroyStack();
         transform.position = market.EntryPoint.position;
         StartCoroutine(CustomerRoutine());
@@ -28,9 +29,11 @@ public class CustomerAI : MonoBehaviour, IPoolableObjects
     {
         _visuals.SetMovement(true);
         _visuals.SetPocket(true);
-        yield return MovementUtility.MoveToTarget(transform, _assignedDock.WaitingPoint.position, _moveSpeed);
-        transform.LookAt(_assignedDock.DeliverPoint);
         _assignedDock.RegisterCustomer(this);
+        _isBuying = false;
+        yield return MovementUtility.MoveToTarget(transform, _assignedDock.WaitingPoint.position, _moveSpeed);
+        _isBuying = true;
+        transform.LookAt(_assignedDock.DeliverPoint);
         _visuals.SetMovement(false);
         while (!_isServed)
         {

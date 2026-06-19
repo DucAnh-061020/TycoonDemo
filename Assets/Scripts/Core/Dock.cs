@@ -8,7 +8,7 @@ public class Dock : MonoBehaviour
 
     private Queue<CustomerAI> waitingCustomers = new Queue<CustomerAI>();
     private int reservedCustomerCount = 0;
-
+    public bool HasWaitingCustomer => waitingCustomers.Count > 0;
     public Transform WaitingPoint => waitingPoint;
     public Transform DeliverPoint => deliverPoint;
 
@@ -28,9 +28,18 @@ public class Dock : MonoBehaviour
         return null;
     }
 
+    public CustomerAI PrepareToBuy()
+    {
+        if (waitingCustomers.Count > 0)
+        {
+            return waitingCustomers.Peek();
+        }
+        return null;
+    }
+
     public bool TryReserveCustomer()
     {
-        if(waitingCustomers.Count > reservedCustomerCount)
+        if (waitingCustomers.Count > reservedCustomerCount)
         {
             reservedCustomerCount++;
             return true;

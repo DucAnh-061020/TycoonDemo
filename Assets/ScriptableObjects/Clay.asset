@@ -9,14 +9,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 370bb71aa4760bf44b1ee11c22c151f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d9f649bf98768c419d91fd7c2c2ecc6, type: 3}
   m_Name: Clay
   m_EditorClassIdentifier: 
-  treeType: Clay
+  upgradeId: Clay
+  title: Clay
+  description: 
+  tiers:
+  - cost: 1000
+    modifierValue: 2
+  - cost: 2000
+    modifierValue: 3
+  currentLevel: 0
+  displayImage: {fileID: 21300000, guid: 40ac2c9f66ad60340ae5ae80eeff9656, type: 3}
+  plantName: Clay
   fruitPrefab: {fileID: 431050899200795660, guid: 7f43ad0a1dc9942deb52963a8ee6e6f4, type: 3}
-  baseProfit: 500
+  baseProfit: 400
   growthTime: 1
-  upgradeCost: 100
-  createCost: 1000
-  maxLevel: 10
-  productImage: {fileID: 21300000, guid: 40ac2c9f66ad60340ae5ae80eeff9656, type: 3}
+  createCost: 100000
+  localTiers:
+  - cost: 0
+    modifierValue: 1
+  - cost: 100
+    modifierValue: 1.3
+  - cost: 100
+    modifierValue: 1.6
+  - cost: 100
+    modifierValue: 1.8

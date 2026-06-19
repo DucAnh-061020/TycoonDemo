@@ -16,8 +16,6 @@ public class GameDirector : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float customerSpawnInterval = 1f;
 
-    // Core State Tracking
-    private int maxCustomers = 1; // Starts at 1 as per your prompt
     private int currentCustomerCount = 0;
     private List<Tree> unlockedTrees = new List<Tree>();
 
@@ -30,13 +28,11 @@ public class GameDirector : MonoBehaviour
     private void OnEnable()
     {
         EventsBroker.OnTreeUnlocked += HandleTreeUnlocked;
-        EventsBroker.OnMaxBuyersIncreased += HandleMaxBuyersIncreased;
     }
 
     private void OnDisable()
     {
         EventsBroker.OnTreeUnlocked -= HandleTreeUnlocked;
-        EventsBroker.OnMaxBuyersIncreased -= HandleMaxBuyersIncreased;
     }
 
     private void Start()
@@ -50,7 +46,7 @@ public class GameDirector : MonoBehaviour
         {
             yield return new WaitForSeconds(customerSpawnInterval);
 
-            if (currentCustomerCount < maxCustomers)
+            if (currentCustomerCount < GlobalUpgradeManager.Instance.MaxCustomer)
             {
                 SpawnCustomer();
             }
@@ -73,7 +69,7 @@ public class GameDirector : MonoBehaviour
         currentCustomerCount = Mathf.Max(0, currentCustomerCount - 1);
     }
 
-    private void HandleTreeUnlocked(TreeData data, Transform spawnTransform)
+    private void HandleTreeUnlocked(PlantProfitUpgrade data, Transform spawnTransform)
     {
         if (!treePrefab.TryGetComponent(out Tree tree))
         {
@@ -102,10 +98,5 @@ public class GameDirector : MonoBehaviour
         DelivererAI newDeliverer = delivererObj.GetComponent<DelivererAI>();
 
         newDeliverer.InitializeFromPool(market, associatedTree);
-    }
-
-    private void HandleMaxBuyersIncreased(int additionalBuyers)
-    {
-        maxCustomers += additionalBuyers;
     }
 }
